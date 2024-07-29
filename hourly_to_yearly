@@ -1,0 +1,61 @@
+"""
+This script calculates the annual salary based on user input for pay frequency and hourly rate.
+The user is prompted to input their pay frequency (hourly, weekly, bi-weekly, monthly, annually)
+and their hourly rate. The script then calculates and prints the annual salary.
+Author:  Duane Robinson:  07/27/2024
+"""
+
+def calculate_annual_salary(pay_frequency, hourly_rate):
+    """
+    Calculate the annual salary based on pay frequency and hourly rate.
+    
+    Parameters:
+    pay_frequency (str): The frequency of pay (hourly, weekly, bi-weekly, monthly, annually)
+    hourly_rate (float): The hourly wage rate
+    
+    Returns:
+    float: The calculated annual salary
+    """
+    
+    # Define the number of hours per week and number of weeks per year
+    hours_per_week = 40
+    weeks_per_year = 52
+    
+    # Calculate the annual salary based on the pay frequency
+    if pay_frequency.lower() == 'hourly':
+        annual_salary = hourly_rate * hours_per_week * weeks_per_year
+    elif pay_frequency.lower() == 'weekly':
+        annual_salary = hourly_rate * hours_per_week * weeks_per_year / 52
+    elif pay_frequency.lower() == 'bi-weekly':
+        annual_salary = hourly_rate * hours_per_week * weeks_per_year / 26
+    elif pay_frequency.lower() == 'monthly':
+        annual_salary = hourly_rate * hours_per_week * weeks_per_year / 12
+    elif pay_frequency.lower() == 'annually':
+        annual_salary = hourly_rate * hours_per_week * weeks_per_year / 1
+    else:
+        raise ValueError("Invalid pay frequency. Please enter 'hourly', 'weekly', 'bi-weekly', 'monthly', or 'annually'.")
+    
+    return annual_salary
+
+def main():
+    """
+    Main function to prompt the user for input and display the calculated annual salary.
+    """
+    try:
+        # Prompt the user to input their pay frequency
+        pay_frequency = input("Enter your pay frequency (hourly, weekly, bi-weekly, monthly, annually): ").strip()
+        
+        # Prompt the user to input their hourly rate
+        hourly_rate = float(input("Enter your hourly rate: "))
+        
+        # Calculate the annual salary
+        annual_salary = calculate_annual_salary(pay_frequency, hourly_rate)
+        
+        # Print the annual salary
+        print(f"Your annual salary is: ${annual_salary:.2f}")
+    except ValueError as e:
+        # Handle invalid input
+        print(e)
+
+if __name__ == "__main__":
+    main()
